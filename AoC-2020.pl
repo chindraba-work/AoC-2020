@@ -39,12 +39,14 @@ use strict;
 use warnings;
 use lib ".";
 
+my $aoc_year = 2020;
 
 exit unless ( @ARGV );
 
 my $challenge_day = shift @ARGV;
-our $data_file = sprintf "Data/AoC-2020-%02d.txt", $challenge_day;
-my $solution_file = sprintf "Solutions/AoC-2020-%02d", $challenge_day;;
+our $break_line = "------------------------------------------------\n";
+our $data_file = sprintf "Data/AoC-$aoc_year-%02d.txt", $challenge_day;
+my $solution_file = sprintf "Solutions/AoC-$aoc_year-%02d", $challenge_day;;
 if ( @ARGV ) {
     my $challenge_part = shift @ARGV;
     $solution_file = sprintf "${solution_file}_%s", lc($challenge_part);

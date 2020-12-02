@@ -40,26 +40,76 @@ use Elves::GetData qw( :all );
 
 my $VERSION = '0.20.01';
 
-our $show_progress = 0;
-
+my $day_num = 1;
+my $part_num;
 my $puzzle_data_file = $main::data_file;
+my $result;
+my ($sum_found, $first_index, $second_index, $third_index);
 
 my @expense_list = slurp_data $puzzle_data_file;
-my $sum_found = 0;
-my $first_index = 0;
-my $second_index;
-while (! $sum_found && $first_index < scalar @expense_list ) {
+
+# Part 1
+$part_num = 1;
+($sum_found, $first_index, $second_index, $third_index) = (0) x 4;
+while (! $sum_found && $first_index <= $#expense_list ) {
     $second_index = 1 + $first_index;
-    while (! $sum_found && $second_index < scalar @expense_list ) {
-        if  ( 2020 == $expense_list[$first_index] + $expense_list[$second_index] ) {
+    while (! $sum_found && $second_index <= $#expense_list ) {
+        if  ( 2020 == $expense_list[$first_index]
+                    + $expense_list[$second_index] ) {
             $sum_found = 1;
+            $result = $expense_list[$first_index]
+                     * $expense_list[$second_index];
         } else {
             $second_index++;
         }
     }
     $first_index++ unless $sum_found;
 }
-my $product = $expense_list[$first_index] * $expense_list[$second_index];
-print "The two numebrs are $expense_list[$first_index] and $expense_list[$second_index] for $product product.\n";
+printf "The two numbers are %u and %u.\nTheir product is %u.\n",
+    $expense_list[$first_index],
+    $expense_list[$second_index],
+    $result;
+printf "\n%s\nAdvent of Code 2020, Day %u Part %u : the answer is %u\n\n%s",
+    $main::break_line,
+    $day_num,
+    $part_num,
+    $result,
+    $main::break_line;
 
+# Part 2
+$part_num = 2;
+($sum_found, $first_index, $second_index, $third_index) = (0) x 4;
+while (! $sum_found && $first_index <= $#expense_list ) {
+    $second_index = 1 + $first_index;
+    while (! $sum_found && $second_index <= $#expense_list ) {
+        $third_index = $second_index + 1;
+        while (! $sum_found && $third_index <= $#expense_list ) {
+            if  ( 2020 == $expense_list[$first_index]
+                        + $expense_list[$second_index]
+                        + $expense_list[$third_index]) {
+                $sum_found = 1;
+                $result = $expense_list[$first_index] 
+                         * $expense_list[$second_index]
+                         * $expense_list[$third_index];
+            } else {
+                $third_index++;
+            }
+        }
+        $second_index++ unless $sum_found;
+    }
+    $first_index++ unless $sum_found;
+}
+printf "The three numbers are %u, %u and %u.\nTheir product is %u.\n",
+    $expense_list[$first_index],
+    $expense_list[$second_index],
+    $expense_list[$third_index],
+    $result;
+printf "\n%s\nAdvent of Code 2020, Day %u Part %u : the answer is %u\n\n%s",
+    $main::break_line,
+    $day_num,
+    $part_num,
+    $result,
+    $main::break_line;
+
+    
 1;
