@@ -45,13 +45,8 @@ exit unless ( @ARGV );
 
 my $challenge_day = shift @ARGV;
 our $break_line = "------------------------------------------------\n";
-our $data_file = sprintf "Data/AoC-$aoc_year-%02d.txt", $challenge_day;
-my $solution_file = sprintf "Solutions/AoC-$aoc_year-%02d", $challenge_day;;
-if ( @ARGV ) {
-    my $challenge_part = shift @ARGV;
-    $solution_file = sprintf "${solution_file}_%s", lc($challenge_part);
-}
-$solution_file .= ".pl";
+our $data_file = sprintf "Data/day_%02d.txt", $challenge_day;
+my $solution_file = sprintf "Solutions/day_%02d.pl", $challenge_day;;
 
 do {
     do $solution_file;
