@@ -33,23 +33,20 @@
 #                                                                      #
 ########################################################################
 
-use 5.026001;
+use 5.030000;
 use strict;
 use warnings;
 use Elves::GetData qw( :all );
+use Elves::Reports qw( :all );
 
 my $VERSION = '0.20.01';
 
-my $day_num = 1;
-my $part_num;
-my $puzzle_data_file = $main::data_file;
 my $result;
 my ($sum_found, $first_index, $second_index, $third_index);
 
-my @expense_list = slurp_data $puzzle_data_file;
+my @expense_list = slurp_data $main::puzzle_data_file;
 
 # Part 1
-$part_num = 1;
 ($sum_found, $first_index, $second_index, $third_index) = (0) x 4;
 while (! $sum_found && $first_index <= $#expense_list ) {
     $second_index = 1 + $first_index;
@@ -69,15 +66,10 @@ printf "The two numbers are %u and %u.\nTheir product is %u.\n",
     $expense_list[$first_index],
     $expense_list[$second_index],
     $result;
-printf "\n%s\nAdvent of Code 2020, Day %u Part %u : the answer is %u\n\n%s",
-    $main::break_line,
-    $day_num,
-    $part_num,
-    $result,
-    $main::break_line;
+report_number(1, $result);
 
+exit unless $main::do_part_2;
 # Part 2
-$part_num = 2;
 ($sum_found, $first_index, $second_index, $third_index) = (0) x 4;
 while (! $sum_found && $first_index <= $#expense_list ) {
     $second_index = 1 + $first_index;
@@ -104,12 +96,7 @@ printf "The three numbers are %u, %u and %u.\nTheir product is %u.\n",
     $expense_list[$second_index],
     $expense_list[$third_index],
     $result;
-printf "\n%s\nAdvent of Code 2020, Day %u Part %u : the answer is %u\n\n%s",
-    $main::break_line,
-    $day_num,
-    $part_num,
-    $result,
-    $main::break_line;
+report_number(2, $result);
 
     
 1;

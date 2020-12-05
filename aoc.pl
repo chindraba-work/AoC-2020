@@ -39,22 +39,24 @@ use strict;
 use warnings;
 use lib ".";
 
-my $aoc_year = 2020;
+our $aoc_year = 2020;
+our $use_live_data = 1;
+our $do_part_2 = 1;
 
 exit unless ( @ARGV );
 
-my $challenge_day = shift @ARGV;
-our $break_line = "------------------------------------------------\n";
-our $data_file = sprintf "Data/day_%02d.txt", $challenge_day;
-my $solution_file = sprintf "Solutions/day_%02d.pl", $challenge_day;;
+our $challenge_day = shift @ARGV;
+
+my $solution_file = sprintf "Solutions/day_%02d.pl", $challenge_day;
+our $puzzle_data_file = sprintf "Data/%s_%02d.txt", $use_live_data ? 'day' : 'sample', $challenge_day;
 
 do {
     do $solution_file;
     exit;
-} if ( -f $data_file && -f $solution_file );
+} if ( -f $puzzle_data_file && -f $solution_file );
 
-if ( -f $data_file ) {
-    say "The solutions for $challenge_day ($solution_file, $data_file) seem to be incomplete.";
+if ( -f $puzzle_data_file ) {
+    say "The solutions for $challenge_day ($solution_file, $puzzle_data_file) seem to be incomplete.";
 } else {
     say "There is no data for $challenge_day. Nothing can be done with out data.";
 }

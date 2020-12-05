@@ -33,37 +33,17 @@
 #                                                                      #
 ########################################################################
 
-use 5.026001;
+use 5.030000;
 use strict;
 use warnings;
 use Elves::GetData qw( :all );
+use Elves::Reports qw( :all );
 
 my $VERSION = '0.20.03';
 
-my $do2 = 1;
-my $day_num = 3;
-my $part_num;
-my $puzzle_data_file = $main::data_file;
-my ($valid, $count, $count_min, $count_max, $letter, $phrase);
 my $result;
 
-
-my $testing = 0;
-my @check_data =(
-'..##.......',
-'#...#...#..',
-'.#....#..#.',
-'..#.#...#.#',
-'.#...##..#.',
-'..#.##.....',
-'.#.#.#....#',
-'.#........#',
-'#.##...#...',
-'#...##....#',
-'.#..#...#.#',
-);
-
-my @puzzle_data = $testing ? @check_data : read_lines $puzzle_data_file;
+my @puzzle_data = read_lines $main::puzzle_data_file;
 
 sub count_trees {
     my ($col_inc, $row_inc) = @_;
@@ -80,34 +60,20 @@ sub count_trees {
 }
 
 # Part 1
-$part_num = 1;
-$result = count_trees(3,1);
+
+report_number( 1, count_trees(3,1));
+# $result = count_trees(3,1);
     
 
-printf "\n%s\nAdvent of Code 2020, Day %u Part %u : the answer is %u\n\n%s",
-    $main::break_line,
-    $day_num,
-    $part_num,
-    $result,
-    $main::break_line;
-
-exit unless $do2;
+exit unless $main::do_part_2;
 # Part 2
-$part_num = 2;
-$result = 
+report_number(2 ,
     count_trees(1, 1) *
     count_trees(3, 1) *
     count_trees(5, 1) *
     count_trees(7, 1) *
-    count_trees(1, 2);
-
-
-printf "\n%s\nAdvent of Code 2020, Day %u Part %u : the answer is %u\n\n%s",
-    $main::break_line,
-    $day_num,
-    $part_num,
-    $result,
-    $main::break_line;
+    count_trees(1, 2)
+);
 
     
 1;

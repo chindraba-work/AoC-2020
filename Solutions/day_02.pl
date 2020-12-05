@@ -33,48 +33,31 @@
 #                                                                      #
 ########################################################################
 
-use 5.026001;
+use 5.030000;
 use strict;
 use warnings;
 use Elves::GetData qw( :all );
+use Elves::Reports qw( :all );
 
 my $VERSION = '0.20.02';
 
-my $do2 = 1;
-my $day_num = 2;
-my $part_num;
-my $puzzle_data_file = $main::data_file;
 my ($valid, $count, $count_min, $count_max, $letter, $phrase);
 my $result;
 
 
-my $testing = 0;
-my @check_data =(
-'1-3 a: abcde',
-'1-3 b: cdefg',
-'2-9 c: ccccccccc',
-);
-
-my @puzzle_data = $testing ? @check_data : read_lines $puzzle_data_file;
+my @puzzle_data = read_lines $main::puzzle_data_file;
 
 # Part 1
-$part_num = 1;
 $result = 0;
 map {
     ($count_min, $count_max, $letter, $phrase) = ($_ =~ /(\d+)\-(\d+)\s(.):\s(.+)/);
     $count = () = $phrase =~ /\Q$letter/g;
     $result++ if ($count_min <= $count && $count_max >= $count)
 } @puzzle_data;
-printf "\n%s\nAdvent of Code 2020, Day %u Part %u : the answer is %u\n\n%s",
-    $main::break_line,
-    $day_num,
-    $part_num,
-    $result,
-    $main::break_line;
+report_number(1, $result);
 
-exit unless $do2;
+exit unless $main::do_part_2;
 # Part 2
-$part_num = 2;
 $result = 0;
 map {
     ($count_min, $count_max, $letter, $phrase) = ($_ =~ /(\d+)\-(\d+)\s(.):\s(.+)/);
@@ -82,12 +65,6 @@ map {
     $result++ if (!($letters[$count_max - 1] eq $letter) ^ !($letters[$count_min - 1] eq $letter));
 } @puzzle_data;
 
-printf "\n%s\nAdvent of Code 2020, Day %u Part %u : the answer is %u\n\n%s",
-    $main::break_line,
-    $day_num,
-    $part_num,
-    $result,
-    $main::break_line;
-
+report_number(2, $result);
     
 1;
