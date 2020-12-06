@@ -1,12 +1,11 @@
-#!/usr/bin/perl
-
+#! /usr/bin/env perl
 # SPDX-License-Identifier: MIT
 
 ########################################################################
 #                                                                      #
 #  This file is part of the solution set for the programming puzzles   #
 #  presented by the 2020 Advent of Code challenge.                     #
-#  See: https://adventofcode.com/2019                                  #
+#  See: https://adventofcode.com/2020                                  #
 #                                                                      #
 #  Copyright © 2020  Chindraba (Ronald Lamoreaux)                      #
 #                    <aoc@chindraba.work>                              #
@@ -37,28 +36,42 @@
 use 5.030000;
 use strict;
 use warnings;
-use lib ".";
+use Elves::GetData qw( :all );
+use Elves::Reports qw( :all );
+my $VERSION = '0.20.06';
 
-our $aoc_year = 2020;
-our $use_live_data = 1;
-our $do_part_2 = 1;
+my $result;
+my @puzzle_data = map {
+    [ map { split /:/, $_ } (split / /, $_) ]
+} (read_comma_list($main::puzzle_data_file, "  "));
 
-exit unless ( @ARGV );
+my ($tally_all, $tally_any) = (0, 0);
 
-our $challenge_day = shift @ARGV;
+map {
+    my %answers = ();
+    map { map $answers{$_}++, (split //); } @{$_};
+    my $group_size = @{$_};
+    map {
+        $tally_any++;
+        $tally_all++ if $answers{$_} == $group_size;
+    } (keys %answers);
+} @puzzle_data;
 
-my $solution_file = sprintf "Solutions/day_%02d.pl", $challenge_day;
-our $puzzle_data_file = sprintf "Data/%s_%02d.txt", $use_live_data ? 'day' : 'sample', $challenge_day;
 
-do {
-    do $solution_file;
-    exit;
-} if ( -f $puzzle_data_file && -f $solution_file );
+# Part 1
+say "====== Part 1 ======";
 
-if ( -f $puzzle_data_file ) {
-    say "The solutions for $challenge_day ($solution_file, $puzzle_data_file) seem to be incomplete.";
-} else {
-    say "There is no data for $challenge_day. Nothing can be done with out data.";
-}
+report_number(1, $tally_any);
+
+say "====================";
+
+exit unless $main::do_part_2;
+
+# Part 2
+say "====== Part 2 ======";
+
+report_number(2, $tally_all);
+
+say "====================";
 
 1;
