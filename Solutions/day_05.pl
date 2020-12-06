@@ -39,13 +39,12 @@ use warnings;
 use Elves::GetData qw( :all );
 use Elves::Reports qw( :all );
 use List::Util qw(sum min max);
-use Data::Dumper;
 
 my $VERSION = '0.20.05';
 
 my $result;
 
-my @seat_nums = map { my $placer = $_; $placer =~ tr/RLFB/1001/; oct('0b'.$placer) } (read_lines($main::puzzle_data_file, "  "));
+my @seat_nums = map { my $placer = $_; $placer =~ tr/BRFL/110/; oct('0b'.$placer) } (read_lines($main::puzzle_data_file, "  "));
 
 # Part 1
 report_number(1, max @seat_nums);

@@ -38,12 +38,10 @@ use strict;
 use warnings;
 use Elves::GetData qw( :all );
 use Elves::Reports qw( :all );
+
 my $VERSION = '0.20.06';
 
-my $result;
-my @puzzle_data = map {
-    [ map { split /:/, $_ } (split / /, $_) ]
-} (read_comma_list($main::puzzle_data_file, "  "));
+my @puzzle_data = read_lined_list($main::puzzle_data_file);
 
 my ($tally_all, $tally_any) = (0, 0);
 

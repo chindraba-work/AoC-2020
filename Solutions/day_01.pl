@@ -44,7 +44,7 @@ my $VERSION = '0.20.01';
 my $result;
 my ($sum_found, $first_index, $second_index, $third_index);
 
-my @expense_list = slurp_data $main::puzzle_data_file;
+my @expense_list = read_lines $main::puzzle_data_file;
 
 # Part 1
 ($sum_found, $first_index, $second_index, $third_index) = (0) x 4;

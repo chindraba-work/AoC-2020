@@ -43,10 +43,7 @@ my $VERSION = '0.20.04';
 
 my $result;
 
-
-my @passport_list = map {
-    { map { split /:/, $_ } (split / /, $_) } 
-} (read_comma_list($main::puzzle_data_file, "  "));
+my @passport_list = read_lined_hash($main::puzzle_data_file);
 
 # Part 1
 
