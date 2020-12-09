@@ -41,8 +41,8 @@ use lib ".";
 use lib "./../AoC-Common";
 
 our $aoc_year = 2020;
-our $use_live_data = 1;
-our $do_part_2 = 1;
+our $use_live_data = 0;
+our $do_part_2 = 0;
 
 exit unless ( @ARGV );
 
@@ -61,9 +61,6 @@ if ( @ARGV ) {
 } else {
     $solution_file = sprintf "Solutions/day_%02d_%s.pl", $challenge_day, 'a';
 }
-
-# my $solution_file = sprintf "Solutions/day_%02d.pl", $challenge_day;
-# our $puzzle_data_file = sprintf "Data/%s_%02d.txt", $use_live_data ? 'day' : 'sample', $challenge_day;
 
 do {
     do $solution_file;
