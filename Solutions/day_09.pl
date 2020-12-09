@@ -48,7 +48,7 @@ my @puzzle_data = read_lines $main::puzzle_data_file;
 my $preamble = $main::use_live_data? 25 : 5;
 
 # Part 1
-say "====== Part 1 ======";
+
 my ($base, $first, $last, $target, $found);
 $base = $preamble;
 $found = 1;
@@ -70,12 +70,10 @@ while ($found && $base < scalar @puzzle_data) {
 
 report_number(1, $puzzle_data[$base]);
 
-say "====================";
-
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
+
 $found = 0;
 $first = -1;
 while (!$found && ++$first < $base - 1) {
@@ -85,7 +83,5 @@ while (!$found && ++$first < $base - 1) {
 }
 
 report_number(2, min(@puzzle_data[$first .. $last]) + max(@puzzle_data[$first .. $last]));
-
-say "====================";
 
 1;

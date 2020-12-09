@@ -57,7 +57,6 @@ my %puzzle_data = map {
 } (read_lines $main::puzzle_data_file);
 
 # Part 1
-say "====== Part 1 ======";
 
 my %valid = ();
 my @find = ('shiny gold');
@@ -74,12 +73,9 @@ while (@find) {
 }
 report_number(1, scalar (keys %valid));
 
-say "====================";
-
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
 
 sub fill_bag {
     return 0 if 'needs' eq $_[1];
@@ -93,7 +89,5 @@ sub fill_bag {
 
 $result = 0;
 report_number(2, fill_bag(1,'shiny gold') - 1);
-
-say "====================";
 
 1;

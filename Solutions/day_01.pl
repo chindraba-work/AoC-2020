@@ -62,10 +62,7 @@ while (! $sum_found && $first_index <= $#expense_list ) {
     }
     $first_index++ unless $sum_found;
 }
-printf "The two numbers are %u and %u.\nTheir product is %u.\n",
-    $expense_list[$first_index],
-    $expense_list[$second_index],
-    $result;
+
 report_number(1, $result);
 
 exit unless $main::do_part_2;
@@ -91,11 +88,7 @@ while (! $sum_found && $first_index <= $#expense_list ) {
     }
     $first_index++ unless $sum_found;
 }
-printf "The three numbers are %u, %u and %u.\nTheir product is %u.\n",
-    $expense_list[$first_index],
-    $expense_list[$second_index],
-    $expense_list[$third_index],
-    $result;
+
 report_number(2, $result);
 
     

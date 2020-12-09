@@ -57,19 +57,14 @@ map {
 
 
 # Part 1
-say "====== Part 1 ======";
 
 report_number(1, $tally_any);
-
-say "====================";
 
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
 
 report_number(2, $tally_all);
 
-say "====================";
 
 1;
