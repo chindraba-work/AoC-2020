@@ -1,12 +1,11 @@
-#!/usr/bin/perl
-
+#! /usr/bin/env perl
 # SPDX-License-Identifier: MIT
 
 ########################################################################
 #                                                                      #
 #  This file is part of the solution set for the programming puzzles   #
 #  presented by the 2020 Advent of Code challenge.                     #
-#  See: https://adventofcode.com/2019                                  #
+#  See: https://adventofcode.com/2020                                  #
 #                                                                      #
 #  Copyright © 2020  Chindraba (Ronald Lamoreaux)                      #
 #                    <aoc@chindraba.work>                              #
@@ -37,28 +36,56 @@
 use 5.030000;
 use strict;
 use warnings;
-use lib ".";
+use Elves::GetData qw( :all );
+use Elves::Reports qw( :all );
+use Elves::GameComp;
 
-our $aoc_year = 2020;
-our $use_live_data = 1;
-our $do_part_2 = 1;
+my $VERSION = '0.20.08';
 
-exit unless ( @ARGV );
+my $result;
 
-our $challenge_day = shift @ARGV;
+my @puzzle_data = read_lines $main::puzzle_data_file;
 
-my $solution_file = sprintf "Solutions/day_%02d.pl", $challenge_day;
-our $puzzle_data_file = sprintf "Data/%s_%02d.txt", $use_live_data ? 'day' : 'sample', $challenge_day;
-
-do {
-    do $solution_file;
-    exit;
-} if ( -f $puzzle_data_file && -f $solution_file );
-
-if ( -f $puzzle_data_file ) {
-    say "The solutions for $challenge_day ($solution_file, $puzzle_data_file) seem to be incomplete.";
-} else {
-    say "There is no data for $challenge_day. Nothing can be done with out data.";
+sub re_boot {
+    my @boot_code = @_;
+    my $return_value = 0;
+    my $fix_index = 0;
+    while (! $clean_exit && $fix_index < scalar @boot_code) {
+        if ($boot_code[$fix_index] =~ /no/) {
+            $boot_code[$fix_index] =~ s/no/jm/;
+            $return_value = boot_game(@boot_code);
+            if (!$clean_exit) {
+                $boot_code[$fix_index] =~ s/jm/no/;
+                $fix_index++;
+            }
+        } elsif  ($boot_code[$fix_index] =~ /jm/) {
+            $boot_code[$fix_index] =~ s/jm/no/;
+            $return_value = boot_game(@boot_code);
+            if (!$clean_exit) {
+                $boot_code[$fix_index] =~ s/no/jm/;
+                $fix_index++;
+            }
+        } else {
+            $fix_index++;
+        }
+    }
+    return $return_value;
 }
+
+# Part 1
+say "====== Part 1 ======";
+
+report_number(1, boot_game(@puzzle_data));
+
+say "====================";
+
+exit unless $main::do_part_2;
+
+# Part 2
+say "====== Part 2 ======";
+
+report_number(2, re_boot(@puzzle_data));
+
+say "====================";
 
 1;
