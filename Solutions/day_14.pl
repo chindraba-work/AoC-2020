@@ -36,29 +36,34 @@
 use 5.030000;
 use strict;
 use warnings;
+if (! defined $main::use_live_data) {
+    use lib '/vertex/paguba/AoC-2020';
+    use lib '/vertex/paguba/AoC-Common';
+    $main::aoc_year = 2020;
+    $main::challenge_day =15;
+    $main::use_live_data = 1;
+    $main::do_part_2 = 1;
+    
+    if ($main::use_live_data) {
+        $main::puzzle_data_file = '/vertex/paguba/AoC-2020/Data/day_14.txt';
+    } else {
+        $main::puzzle_data_file = '/vertex/paguba/AoC-2020/Data/sample_14.txt';
+        $main::puzzle_data_file = '/vertex/paguba/AoC-2020/Data/sample_14_2.txt';
+    }
+}
 use Elves::GetData qw( :all );
 use Elves::Reports qw( :all );
 use List::Util qw(sum);
 
 my $VERSION = '0.20.14';
 
-my $result;
-
-my @puzzle_data = read_lines $main::puzzle_data_file;
-
 my @memory;
 my %big_memory;
-
-my @commands = map {
-    $_ =~ /(.+)\s+=\s+(.+)/;
-    [$1, $2];
-} (@puzzle_data);
 
 sub mask_it {
     my $val = shift;
     my @mask = split //, shift;
     my @bit_stream = split(//,sprintf('%036b',$val));
-    
     foreach (0..35) {
         $bit_stream[$_] = $mask[$_] unless 'X' eq $mask[$_];
     }
@@ -66,14 +71,8 @@ sub mask_it {
     return oct("0b" . join('',@bit_stream));
 }
 
-sub store_it {
-    my $loc = shift;
-    my $val = mask_it(@_);
-    $memory[$loc] = mask_it(@_);
-}
 sub merge_bits {
-    my ($bit, $val, @list) = @_;
-    my @new_list = ();
+    my ($bit, $val, @list, @new_list) = @_;
     foreach my $addr (@list) {
         my @group = split(//,sprintf('%036b',$addr));
         $group[$bit] = 1;
@@ -96,23 +95,17 @@ sub mask_addr {
     return @list;
 }
 
-sub store_them {
-    my $val = shift;
-    foreach (@_) {
-        $big_memory{$_} = $val;
-    }
-}
 
 # Part 1
 say "====== Part 1 ======";
 my $mask;
-foreach (@commands) {
+foreach ( map { $_ =~ /(.+)\s+=\s+(.+)/; [$1, $2]; } (read_lines $main::puzzle_data_file) 
+) {
     if ('mask' eq @{$_}[0]) {
         $mask = @{$_}[1];
     } else {
         @{$_}[0] =~ /(\d+)/;
-        my $add = $1;
-        store_it($add, @{$_}[1], $mask);
+        $memory[$1] = mask_it(@{$_}[1], $mask);
     }
 }
 report_number(1, sum(map{ $_? $_:0;}(@memory)));
@@ -123,24 +116,22 @@ exit unless $main::do_part_2;
 
 # Part 2
 say "====== Part 2 ======";
-if (!$main::use_live_data && defined $main::puzzle_data_file2) {
-    @puzzle_data = read_lines $main::puzzle_data_file2;
-}
-@commands = map {
-    $_ =~ /(.+)\s+=\s+(.+)/;
-    [$1, $2];
-} (@puzzle_data);
 
 $mask = ();
-foreach (@commands) {
+foreach ( map { $_ =~ /(.+)\s+=\s+(.+)/; [$1, $2]; } (read_lines(
+    (!$main::use_live_data && defined $main::puzzle_data_file2)
+        ? $main::puzzle_data_file2
+        : $main::puzzle_data_file
+))) {
     if ('mask' eq @{$_}[0]) {
         $mask = @{$_}[1];
     } else {
+        my $val = @{$_}[1];
         @{$_}[0] =~ /(\d+)/;
-        my @addr_list = mask_addr($1, $mask);
-        store_them(@{$_}[1], @addr_list);
+        foreach (mask_addr($1, $mask)) { $big_memory{$_} = $val; }
     }
 }
+
 @memory = ();
 foreach (keys %big_memory) {
     push @memory, $big_memory{$_};
