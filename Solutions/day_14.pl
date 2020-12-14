@@ -36,21 +36,6 @@
 use 5.030000;
 use strict;
 use warnings;
-if (! defined $main::use_live_data) {
-    use lib '/vertex/paguba/AoC-2020';
-    use lib '/vertex/paguba/AoC-Common';
-    $main::aoc_year = 2020;
-    $main::challenge_day =15;
-    $main::use_live_data = 1;
-    $main::do_part_2 = 1;
-    
-    if ($main::use_live_data) {
-        $main::puzzle_data_file = '/vertex/paguba/AoC-2020/Data/day_14.txt';
-    } else {
-        $main::puzzle_data_file = '/vertex/paguba/AoC-2020/Data/sample_14.txt';
-        $main::puzzle_data_file = '/vertex/paguba/AoC-2020/Data/sample_14_2.txt';
-    }
-}
 use Elves::GetData qw( :all );
 use Elves::Reports qw( :all );
 use List::Util qw(sum);
