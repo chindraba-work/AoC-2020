@@ -118,11 +118,11 @@ say "====================";
 
 exit unless $main::do_part_2;
 
-
 # Part 2
 say "====== Part 2 ======";
 
 $result = 1;
+
 foreach (0 .. $#columns) {
     if ((keys %{$columns[$_]})[0] =~ /departure/) {
         $result *= $ticket[$_];
