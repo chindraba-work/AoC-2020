@@ -94,7 +94,9 @@ foreach my $entry (@puzzle_data) {
     }
 }
 $changed = 1;
+my $runs = 0;
 while (1 == $changed) {
+    $runs++;
     $changed = 0;
     foreach my $curr (0 .. $#columns) {
         if (1 == scalar (keys %{$columns[$curr]})) {
@@ -130,7 +132,7 @@ foreach (0 .. $#columns) {
 }
 
 report_number(2, $result);
-
+report_number(3, $runs);
 say "====================";
 
 1;
