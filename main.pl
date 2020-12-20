@@ -53,7 +53,7 @@ our $puzzle_data_file = sprintf "Data/%s_%02d.txt", $use_live_data ? 'day' : 'sa
 my $second_file = sprintf "Data/sample_%02d_2.txt", $challenge_day;
 
 if ( !$use_live_data && [ -f $second_file ]) {
-    our $puzzle_data_file2 = $second_file
+    our $puzzle_data_file2 = $second_file;
 }
 
 if ( @ARGV ) {
