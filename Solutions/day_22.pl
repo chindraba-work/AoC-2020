@@ -36,20 +36,6 @@
 use 5.030000;
 use strict;
 use warnings;
-if (! defined $main::use_live_data) {
-    use lib ".";
-    use lib "./../AoC-Common";
-    $main::aoc_year = 2020;
-    $main::challenge_day = 22;
-    $main::use_live_data = 0;
-    $main::do_part_2 = 1;
-
-    if ($main::use_live_data) {
-        $main::puzzle_data_file = sprintf "Data/day_%d.txt", $main::challenge_day;
-    } else {
-        $main::puzzle_data_file = sprintf "Data/sample_%d.txt", $main::challenge_day;
-    }
-}
 use Elves::GetData qw( :all );
 use Elves::Reports qw( :all );
 
