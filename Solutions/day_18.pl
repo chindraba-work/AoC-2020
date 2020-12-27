@@ -78,7 +78,6 @@ sub parse_group {
 }
 
 # Part 1
-say "====== Part 1 ======";
 $part = 1;
 $result = 0;
 foreach (@puzzle_data) {
@@ -86,18 +85,14 @@ foreach (@puzzle_data) {
 }
 report_number($part, $result);
 
-say "====================";
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
 $part = 2;
 $result = 0;
 foreach (@puzzle_data) {
     $result += parse_group($part, $_);
 }
 report_number($part, $result);
-
-say "====================";
 
 1;

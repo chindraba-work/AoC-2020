@@ -123,7 +123,6 @@ sub process {
 }
 
 # Part 1
-say "====== Part 1 ======";
 %status = (
     loc  => [0,0],
     face => 'E',
@@ -132,12 +131,9 @@ $waypoint = 0;
 process(@puzzle_data);
 report_number(1, abs($status{'loc'}[0])+abs($status{'loc'}[1]));
 
-say "====================";
-
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
 %status = (
     loc  => [-1,10],
     face => 'E',
@@ -146,7 +142,5 @@ say "====== Part 2 ======";
 $waypoint = 1;
 process(@puzzle_data);
 report_number(2, abs($status{'pos'}[0])+abs($status{'pos'}[1]));
-
-say "====================";
 
 1;

@@ -353,27 +353,19 @@ sub find_sea_monsters {
 
 # Part 1
 $part = 1;
-say "====== Part 1 ======";
 my ($hashes, $image) = sat_image();
-
 $result = 1;
 foreach (@corners) {
     $result *= $_;
 }
-
 report_number($part, $result); # 20899048083289 and 54755174472007
-say "====================";
+
 exit unless $main::do_part_2;
 
 # Part 2
 $part = 2;
-say "====== Part 2 ======";
-
 my $monsters = find_sea_monsters($image);
 $result = $hashes - 15 * $monsters;
-
 report_number($part, $result); # 273 and 1692
-
-say "====================";
 
 1;

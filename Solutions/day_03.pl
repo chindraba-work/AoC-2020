@@ -60,12 +60,10 @@ sub count_trees {
 }
 
 # Part 1
-
 report_number( 1, count_trees(3,1));
-# $result = count_trees(3,1);
-    
 
 exit unless $main::do_part_2;
+
 # Part 2
 report_number(2 ,
     count_trees(1, 1) *

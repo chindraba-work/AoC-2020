@@ -82,7 +82,6 @@ sub mask_addr {
 
 
 # Part 1
-say "====== Part 1 ======";
 my $mask;
 foreach ( map { $_ =~ /(.+)\s+=\s+(.+)/; [$1, $2]; } (read_lines $main::puzzle_data_file) 
 ) {
@@ -95,13 +94,9 @@ foreach ( map { $_ =~ /(.+)\s+=\s+(.+)/; [$1, $2]; } (read_lines $main::puzzle_d
 }
 report_number(1, sum(map{ $_? $_:0;}(@memory)));
 
-say "====================";
-
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
-
 $mask = ();
 foreach ( map { $_ =~ /(.+)\s+=\s+(.+)/; [$1, $2]; } (read_lines(
     (!$main::use_live_data && defined $main::puzzle_data_file2)
@@ -116,13 +111,10 @@ foreach ( map { $_ =~ /(.+)\s+=\s+(.+)/; [$1, $2]; } (read_lines(
         foreach (mask_addr($1, $mask)) { $big_memory{$_} = $val; }
     }
 }
-
 @memory = ();
 foreach (keys %big_memory) {
     push @memory, $big_memory{$_};
 }
-
 report_number(2, sum(map{ $_? $_:0;}(@memory)));
-say "====================";
 
 1;

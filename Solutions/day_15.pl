@@ -52,7 +52,6 @@ if (!$main::use_live_data) {
 my ($round, $next, $last, %history) = (0);
 
 # Part 1
-say "====== Part 1 ======";
 foreach (@puzzle_data) { $history{$_} = ++$round; }
 $last = $puzzle_data[-1];
 $next = $round - $history{$last};
@@ -68,12 +67,9 @@ while ($round < 2020) {
 }
 report_number(1, $last);
 
-say "====================";
-
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
 %history = ();
 $round = 0;
 foreach (@puzzle_data) { $history{$_} = ++$round; }
@@ -90,8 +86,5 @@ while ($round < 30_000_000) {
     $history{$last} = $round;
 }
 report_number(2, $last);
-
-
-say "====================";
 
 1;

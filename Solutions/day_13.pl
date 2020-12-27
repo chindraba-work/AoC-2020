@@ -58,7 +58,6 @@ sub lowest {
     
 
 # Part 1
-say "====== Part 1 ======";
 foreach my $route (@routes) {
     unless ('x' eq $route) {
         my $bal = $route - ($base_time % $route);
@@ -66,24 +65,15 @@ foreach my $route (@routes) {
         $line = $route if $bal == $remaining;
     }
 }
-
 report_number(1, $remaining * $line);
-
-say "====================";
 
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
-
 my @pairs;
 foreach (0..$#routes) {
     push @pairs, mod(-$_, $routes[$_]) if 'x' ne $routes[$_];
 }
-
 report_number(2, cr_combine( @pairs ));
-
-
-say "====================";
 
 1;

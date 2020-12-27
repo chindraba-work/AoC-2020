@@ -46,7 +46,6 @@ my $result;
 my @passport_list = read_lined_hash($main::puzzle_data_file);
 
 # Part 1
-
 $result = 0;
 map {
     $result++ if (
@@ -62,8 +61,8 @@ map {
 report_number(1, $result);
 
 exit unless $main::do_part_2;
-# Part 2
 
+# Part 2
 $result = 0;
 no warnings qw( experimental::smartmatch );
 map {
@@ -78,7 +77,6 @@ map {
         defined $_->{'pid'} && $_->{'pid'} =~ /^[0-9]{9}$/
     )
 } (@passport_list);
-
 report_number(1, $result);
 
 1;

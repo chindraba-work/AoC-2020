@@ -127,7 +127,6 @@ sub change_seats {
 }
 
 # Part 1
-say "====== Part 1 ======";
 @seat_map = map { 
     [split //, $_];
 } (@puzzle_data);
@@ -139,13 +138,9 @@ while ($in_motion) {
 }
 report_number(1, $filled);
 
-say "====================";
-
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
-
 @seat_map = map { 
     [split //, $_];
 } (@puzzle_data);
@@ -156,7 +151,5 @@ while ($in_motion) {
     ($in_motion, $filled, @seat_map) = change_seats(); #@seat_map);
 }
 report_number(2, $filled);
-
-say "====================";
 
 1;

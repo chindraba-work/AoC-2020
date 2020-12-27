@@ -63,29 +63,21 @@ my %conway_init = (
     ],
 );
 
-
 my @base_coords;
 
 # Part 1
 $part = 1;
-say "====== Part 1 ======";
 Elves::Conway::init(%conway_init);
-
 $conway_map = run_game(6);
 report_number($part, scalar (keys %{$conway_map}));
-say "====================";
 
 exit unless $main::do_part_2;
 
 # Part 2
 $part = 2;
-say "====== Part 2 ======";
 $conway_init{'dimensions'} = 4;
 Elves::Conway::init(%conway_init);
-
 $conway_map = run_game(6);
 report_number($part, scalar (keys %{$conway_map}));
-
-say "====================";
 
 1;

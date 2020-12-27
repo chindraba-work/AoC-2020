@@ -110,8 +110,6 @@ sub find_target {
 
 # Part 1
 $part = 1;
-say "====== Part 1 ======";
-
 load_cups();
 foreach (1..100) {
     move(find_target());
@@ -120,16 +118,12 @@ $to[0] = 1;
 @status = walk_it();
 shift @status;
 $result = join '', @status;
-
 report_number($part, $result);
-
-say "====================";
 
 exit unless $main::do_part_2;
 
 # Part 2
 $part = 2;
-say "====== Part 2 ======";
 
 @to = ();
 @fm = ();
@@ -139,9 +133,6 @@ foreach (1..10_000_000) {
     move(find_target());
 }
 $result = $to[1] * $to[$to[1]];
-
 report_number($part, $result);
-
-say "====================";
 
 1;

@@ -112,27 +112,17 @@ while (1 == $changed) {
 }
 
 # Part 1
-say "====== Part 1 ======";
-
 report_number(1, $checksum);
-
-say "====================";
 
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
-
 $result = 1;
-
 foreach (0 .. $#columns) {
     if ((keys %{$columns[$_]})[0] =~ /departure/) {
         $result *= $ticket[$_];
     }
 }
-
 report_number(2, $result);
-report_number(3, $runs);
-say "====================";
 
 1;

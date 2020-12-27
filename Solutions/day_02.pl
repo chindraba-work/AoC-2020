@@ -57,6 +57,7 @@ map {
 report_number(1, $result);
 
 exit unless $main::do_part_2;
+
 # Part 2
 $result = 0;
 map {
@@ -64,7 +65,6 @@ map {
     my @letters = split //, $phrase;
     $result++ if (!($letters[$count_max - 1] eq $letter) ^ !($letters[$count_min - 1] eq $letter));
 } @puzzle_data;
-
 report_number(2, $result);
     
 1;

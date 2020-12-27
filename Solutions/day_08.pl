@@ -92,14 +92,12 @@ sub re_boot {
 }
 
 # Part 1
-
 boot(@puzzle_data);
 report_number(1, $result);
 
 exit unless $main::do_part_2;
 
 # Part 2
-
 re_boot(@puzzle_data);
 report_number(2, $result);
 

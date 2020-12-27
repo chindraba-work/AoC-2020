@@ -141,30 +141,20 @@ sub flip_grid {
 
 # Part 1
 $part = 1;
-say "====== Part 1 ======";
-
 foreach (@puzzle_data) {
     do_hop($tile_grid, $_);
 }
-
 $result = scalar(keys %{$tile_grid});
 report_number($part, $result);
-
-say "====================";
 
 exit unless $main::do_part_2;
 
 # Part 2
 $part = 2;
-say "====== Part 2 ======";
-
 foreach (1..100) {
     $tile_grid = flip_grid($tile_grid);
 }
-
 $result = scalar(keys %{$tile_grid});
 report_number($part, $result);
-
-say "====================";
 
 1;

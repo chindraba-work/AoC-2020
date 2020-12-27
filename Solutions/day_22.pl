@@ -110,7 +110,6 @@ sub play_game {
 
 # Part 1
 $part = 1;
-say "====== Part 1 ======";
 $result = 0;
 %final_deck = play_game(
     elf => [@{$game_deck{'elf'}}],
@@ -123,13 +122,10 @@ foreach my $card (0 .. $#{$final_deck{$final_deck{'winner'}}}) {
 }
 report_number($part, $result);
 
-say "====================";
-
 exit unless $main::do_part_2;
 
 # Part 2
 $part = 2;
-say "====== Part 2 ======";
 $result = 0;
 %final_deck = play_game(
     elf => [@{$game_deck{'elf'}}],
@@ -142,7 +138,5 @@ foreach my $card (0 .. $#{$final_deck{$final_deck{'winner'}}}) {
         * (scalar(@{$final_deck{$final_deck{'winner'}}}) - $card);
 }
 report_number($part, $result);
-
-say "====================";
 
 1;

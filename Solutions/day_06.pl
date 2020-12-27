@@ -55,15 +55,12 @@ map {
     } (keys %answers);
 } @puzzle_data;
 
-
 # Part 1
-
 report_number(1, $tally_any);
 
 exit unless $main::do_part_2;
 
 # Part 2
-
 report_number(2, $tally_all);
 
 

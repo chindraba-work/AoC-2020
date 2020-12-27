@@ -57,7 +57,6 @@ my %puzzle_data = map {
 } (read_lines $main::puzzle_data_file);
 
 # Part 1
-
 my %valid = ();
 my @find = ('shiny gold');
 while (@find) {
@@ -76,7 +75,6 @@ report_number(1, scalar (keys %valid));
 exit unless $main::do_part_2;
 
 # Part 2
-
 sub fill_bag {
     return 0 if 'needs' eq $_[1];
     unless (defined $puzzle_data{$_[1]}{'needs'}) {
@@ -86,8 +84,6 @@ sub fill_bag {
     }
     return $_[0] + $_[0] * $puzzle_data{$_[1]}{'needs'};
 }
-
-$result = 0;
 report_number(2, fill_bag(1,'shiny gold') - 1);
 
 1;

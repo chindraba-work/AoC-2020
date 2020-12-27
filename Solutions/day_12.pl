@@ -146,9 +146,7 @@ sub move {
     }
 }
 
-
 # Part 1
-say "====== Part 1 ======";
 %status = (
     loc  => [0,0],
     face => 'E',
@@ -159,12 +157,9 @@ foreach (@instructions) {
 }
 report_number(1, abs($status{'loc'}[0])+abs($status{'loc'}[1]));
 
-say "====================";
-
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
 %status = (
     loc  => [-1,10],
     face => 'E',
@@ -175,7 +170,5 @@ foreach (@instructions) {
     move(@{$_});
 }
 report_number(2, abs($status{'pos'}[0])+abs($status{'pos'}[1]));
-
-say "====================";
 
 1;

@@ -212,30 +212,21 @@ filter_allergens();
 
 # Part 1
 $part = 1;
-say "====== Part 1 ======";
-
 $result = 0;
 foreach my $ingredient (keys %ingredient_items) {
     if (!exists $ingredient_pairs{$ingredient}) {
         $result += $ingredient_counts{$ingredient};
     }
 }
-
 report_number($part, $result);
-
-say "====================";
 
 exit unless $main::do_part_2;
 
 # Part 2
 $part = 2;
-say "====== Part 2 ======";
 $result = join(',',(sort {
     $ingredient_pairs{$a} cmp $ingredient_pairs{$b}
 } keys %ingredient_pairs));
-
 report_string($part, $result);
-
-say "====================";
 
 1;

@@ -46,8 +46,6 @@ my $result;
 my @puzzle_data = sort { $a <=> $b } (read_lines $main::puzzle_data_file);
   
 # Part 1
-say "====== Part 1 ======";
-
 my $curr_jolts = 0;
 my @delta_jolts = (0) x 4;
 my $device_jolts = 3 + max(@puzzle_data);
@@ -55,16 +53,11 @@ map {
     $delta_jolts[$_ - $curr_jolts]++;
     $curr_jolts = $_ ;
 } (@puzzle_data, $device_jolts);
-
 report_number(1, $delta_jolts[1] * ($delta_jolts[3]));
-
-say "====================";
 
 exit unless $main::do_part_2;
 
 # Part 2
-say "====== Part 2 ======";
-
 my @dag_map = (0, @puzzle_data, $device_jolts);
 my @dag_counts = ();
 sub dag_paths {
@@ -79,9 +72,6 @@ sub dag_paths {
     } ($start + 1 .. $start + 3));
     return $dag_counts[$start];
 }
-
 report_number(2, dag_paths(0, $#dag_map));
-
-say "====================";
 
 1;

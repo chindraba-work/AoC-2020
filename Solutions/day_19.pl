@@ -89,8 +89,6 @@ sub load_rules {
 
 # Part 1
 $part = 1;
-say "====== Part 1 ======";
-
 load_rules();
 $test = "^" . get_rule(0) . "\$";
 @good_stream = ();
@@ -99,16 +97,12 @@ foreach (@data_stream) {
         push @good_stream, $_;
     }
 }
-
 report_number($part, scalar @good_stream);
-
-say "====================";
 
 exit unless $main::do_part_2;
 
 # Part 2
 $part = 2;
-say "====== Part 2 ======";
 if (! $main::use_live_data) {
     @puzzle_data = read_lines $main::puzzle_data_file2;
     %rules = ();
@@ -130,8 +124,6 @@ foreach (@data_stream) {
         push @good_stream, $_;
     }
 }
-
 report_number($part, scalar @good_stream);
-say "====================";
 
 1;

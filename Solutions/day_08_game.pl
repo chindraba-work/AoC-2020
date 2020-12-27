@@ -73,13 +73,11 @@ sub re_boot {
 }
 
 # Part 1
-
 report_number(1, boot_game(@puzzle_data));
 
 exit unless $main::do_part_2;
 
 # Part 2
-
 report_number(2, re_boot(@puzzle_data));
 
 1;

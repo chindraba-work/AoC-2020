@@ -69,15 +69,8 @@ sub encrypt {
 }
 $result = encrypt($door_key, handshake($card_key));
 
-
 # Part 1
 $part = 1;
-say "====== Part 1 ======";
-
-# $result = 1;
 report_number($part, $result);
-
-say "====================";
-
 
 1;
