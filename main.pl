@@ -8,7 +8,7 @@
 #  presented by the 2020 Advent of Code challenge.                     #
 #  See: https://adventofcode.com/2019                                  #
 #                                                                      #
-#  Copyright © 2020  Chindraba (Ronald Lamoreaux)                      #
+#  Copyright © 2020, 2021  Chindraba (Ronald Lamoreaux)                #
 #                    <aoc@chindraba.work>                              #
 #  - All Rights Reserved                                               #
 #                                                                      #
@@ -37,6 +37,7 @@
 use 5.030000;
 use strict;
 use warnings;
+use Time::HiRes;
 use lib ".";
 use lib "./../AoC-Common";
 
@@ -44,6 +45,7 @@ our $aoc_year = 2020;
 our $use_live_data = 1;
 our $do_part_2 = 1;
 
+our @start_time;
 exit unless ( @ARGV );
 
 our $challenge_day = shift @ARGV;
@@ -68,7 +70,11 @@ if ( @ARGV ) {
 }
 
 do {
-    do $solution_file;
+    push @start_time, [Time::HiRes::gettimeofday()];
+    unless (my $return = do $solution_file) {
+        warn "$@" if $@;
+    }
+    printf "Advent of Code %4u, Day %2u processing completed in %.6f sec.\n\n", $aoc_year, $challenge_day, Time::HiRes::tv_interval($start_time[0]);
     exit;
 } if ( -f $puzzle_data_file && -f $solution_file );
 
